@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Welcome to SOPT"
+        android:text="@string/login_title"
         android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginStart="40dp"
-        android:text="ID"
+        android:text="@string/login_id"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="40dp"
-        android:hint="아이디를 입력하세요"
+        android:hint="@string/login_id_hint"
         android:inputType="text"
         android:maxLines="1"
         app:layout_constraintTop_toBottomOf="@+id/login_id_text" />
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="비밀번호"
+        android:text="@string/login_pw"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/login_id_input"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="40dp"
-        android:hint="비밀번호를 입력하세요"
+        android:hint="@string/login_pw_hint"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@+id/login_pw_text" />
 
@@ -67,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="login"
+        android:text="@string/login_confirm"
         app:layout_constraintStart_toStartOf="@+id/login_pw_input"
         app:layout_constraintEnd_toEndOf="@+id/login_pw_input"
         app:layout_constraintTop_toBottomOf="@+id/login_pw_input" />
@@ -77,7 +77,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="signup"
+        android:text="@string/sign_up_title"
         app:layout_constraintEnd_toEndOf="@+id/login_button"
         app:layout_constraintStart_toStartOf="@+id/login_button"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />

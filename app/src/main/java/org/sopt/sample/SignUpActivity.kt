@@ -27,9 +27,9 @@ class SignUpActivity : AppCompatActivity() {
         if (isValidId(idText) && isValidPw(pwText)) {
             intentToLogin(nameText, idText, pwText, mbtiText)
         } else if (isValidId(idText)) {
-            Snackbar.make(binding.root, "비밀번호를 8-12글자 사이로 설정하세요", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, R.string.sign_up_pw_fail, Snackbar.LENGTH_SHORT).show()
         } else {
-            Snackbar.make(binding.root, "아이디를 6-10글자 사이로 설정하세요", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, R.string.sign_up_id_fail, Snackbar.LENGTH_SHORT).show()
         }
     }
 

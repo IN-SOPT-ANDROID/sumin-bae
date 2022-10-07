@@ -18,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            Snackbar.make(binding.root, "회원가입이 완료되었습니다!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, R.string.sign_up_success, Snackbar.LENGTH_SHORT).show()
             val info : Intent? = result.data
 
             val userName = info?.getStringExtra("name").toString()
@@ -57,13 +57,13 @@ class LoginActivity : AppCompatActivity() {
         val inputPw = binding.loginPwInput.text.toString()
 
         if (isEmpty(inputId, inputPw)){
-            Snackbar.make(binding.root, "아이디 또는 비밀번호를 입력해주세요", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, R.string.login_empty, Snackbar.LENGTH_SHORT).show()
         }
         else if (!isMember(inputId, inputPw, userInfo[0], userInfo[1])) {
-            Snackbar.make(binding.root, "아이디 또는 비밀번호를 잘못 입력했습니다", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, R.string.login_fail, Snackbar.LENGTH_SHORT).show()
         }
         else {
-            Toast.makeText(this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
             intentToHome()
         }
     }
