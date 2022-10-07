@@ -19,10 +19,10 @@ class SignUpActivity : AppCompatActivity() {
 
     // 성공 여부 판단
     private fun checkSignup() {
-        val nameText = binding.signupNameInput.text.toString()
-        val idText = binding.signupIdInput.text.toString()
-        val pwText = binding.signupPwInput.text.toString()
-        val mbtiText = binding.signupMbtiInput.text.toString()
+        val nameText = binding.etSignupName.text.toString()
+        val idText = binding.etSignupId.text.toString()
+        val pwText = binding.etSignupPw.text.toString()
+        val mbtiText = binding.etSignupMbti.text.toString()
 
         if (isValidId(idText) && isValidPw(pwText)) {
             intentToLogin(nameText, idText, pwText, mbtiText)
@@ -50,7 +50,7 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.signupSubmitButton.setOnClickListener {
+        binding.btnSignupSubmit.setOnClickListener {
             checkSignup()
         }
     }

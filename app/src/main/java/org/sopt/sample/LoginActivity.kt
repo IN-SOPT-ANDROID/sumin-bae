@@ -53,8 +53,8 @@ class LoginActivity : AppCompatActivity() {
 
     // 성공 여부에 따라 다르게 실행
     private fun executeLogin() {
-        val inputId = binding.loginIdInput.text.toString()
-        val inputPw = binding.loginPwInput.text.toString()
+        val inputId = binding.etLoginId.text.toString()
+        val inputPw = binding.etLoginPw.text.toString()
 
         if (isEmpty(inputId, inputPw)){
             Snackbar.make(binding.root, R.string.login_empty, Snackbar.LENGTH_SHORT).show()
@@ -73,11 +73,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.signupButton.setOnClickListener {
+        binding.btnToSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }
-        binding.loginButton.setOnClickListener {
+        binding.btnLoginSubmit.setOnClickListener {
             executeLogin()
         }
     }

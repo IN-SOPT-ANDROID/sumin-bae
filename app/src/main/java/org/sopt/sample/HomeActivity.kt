@@ -15,7 +15,7 @@ class HomeActivity : AppCompatActivity() {
         val userName = intent.getStringExtra("name")
         val userMbti = intent.getStringExtra("mbti")
 
-        binding.profileName.append(userName)
-        binding.profileMbti.append(userMbti)
+        binding.tvProfileName.append(userName)
+        binding.tvProfileMbti.append(userMbti)
     }
 }
