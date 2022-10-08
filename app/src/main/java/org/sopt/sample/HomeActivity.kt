@@ -13,7 +13,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val userName = intent.getStringExtra("name")
-        val userMbti = intent.getStringExtra("mbti")
+        val userMbti = intent.getStringExtra("mbti")?.uppercase()
 
         binding.tvProfileName.append(userName)
         binding.tvProfileMbti.append(userMbti)

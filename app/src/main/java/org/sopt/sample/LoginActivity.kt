@@ -11,7 +11,8 @@ import org.sopt.sample.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
-    private var userInfo = arrayOf("", "", "", "")
+    // private var userInfo = arrayOf("", "", "", "")
+    private var userInfo: User? = null
 
     // 회원가입 페이지에서 입력한 정보 가져오기
     private val resultLauncher = registerForActivityResult(
@@ -20,13 +21,12 @@ class LoginActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             Snackbar.make(binding.root, R.string.sign_up_success, Snackbar.LENGTH_SHORT).show()
             val info : Intent? = result.data
-
-            val userName = info?.getStringExtra("name").toString()
-            val userId = info?.getStringExtra("id").toString()
-            val userPw = info?.getStringExtra("pw").toString()
-            val userMbti = info?.getStringExtra("mbti").toString().uppercase()
-
-            userInfo = arrayOf(userId, userPw, userName, userMbti)
+            userInfo = info?.getSerializableExtra("info") as User
+            // val userName = info?.getStringExtra("name").toString()
+            //val userId = info?.getStringExtra("id").toString()
+            // val userPw = info?.getStringExtra("pw").toString()
+            // val userMbti = info?.getStringExtra("mbti").toString().uppercase()
+        // userInfo = arrayOf(userId, userPw, userName, userMbti)
         }
     }
 
@@ -36,15 +36,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // 로그인 성공 여부 판단
-    private fun isMember(inputId : String, inputPw : String, id : String, pw : String) : Boolean {
+    private fun isMember(inputId : String, inputPw : String, id : String?, pw : String?) : Boolean {
         return inputId == id && inputPw == pw
     }
 
     // 홈 페이지로 이동
     private fun intentToHome() {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("name", userInfo[2])
-        intent.putExtra("mbti", userInfo[3])
+        intent.putExtra("name", userInfo?.name)
+        intent.putExtra("mbti", userInfo?.mbti)
 
         setResult(RESULT_OK, intent)
         startActivity(intent)
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
         if (isEmpty(inputId, inputPw)){
             Snackbar.make(binding.root, R.string.login_empty, Snackbar.LENGTH_SHORT).show()
         }
-        else if (!isMember(inputId, inputPw, userInfo[0], userInfo[1])) {
+        else if (!isMember(inputId, inputPw, userInfo?.id, userInfo?.pw)) {
             Snackbar.make(binding.root, R.string.login_fail, Snackbar.LENGTH_SHORT).show()
         }
         else {

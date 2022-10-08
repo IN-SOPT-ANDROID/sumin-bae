@@ -5,6 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.databinding.ActivitySignUpBinding
+import java.io.Serializable
+
+data class User (
+    val name: String,
+    val id: String,
+    val pw: String,
+    val mbti: String
+        ) : Serializable
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySignUpBinding
@@ -25,7 +33,9 @@ class SignUpActivity : AppCompatActivity() {
         val mbtiText = binding.etSignupMbti.text.toString()
 
         if (isValidId(idText) && isValidPw(pwText)) {
-            intentToLogin(nameText, idText, pwText, mbtiText)
+            val info = User(nameText, idText, pwText, mbtiText)
+            intentToLogin(info)
+            //intentToLogin(nameText, idText, pwText, mbtiText)
         } else if (isValidId(idText)) {
             Snackbar.make(binding.root, R.string.sign_up_pw_fail, Snackbar.LENGTH_SHORT).show()
         } else {
@@ -34,7 +44,17 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // 로그인 페이지로 이동
-    private fun intentToLogin(name : String, id: String, pw: String, mbti : String) {
+    private fun intentToLogin (user: User) {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.putExtra("info", user as java.io.Serializable)
+        setResult(RESULT_OK, intent)
+        finish()
+    }
+
+
+
+
+    private fun intentToLogintmp(name : String, id: String, pw: String, mbti : String) {
         val intent = Intent(this, LoginActivity::class.java)
         intent.putExtra("name", name)
         intent.putExtra("id", id)
