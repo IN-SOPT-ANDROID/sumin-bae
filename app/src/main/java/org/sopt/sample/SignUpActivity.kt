@@ -18,12 +18,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySignUpBinding
 
     // 회원가입 성공 조건
-    private fun isValidId(id : String) : Boolean {
-        return id.length in 6..10
-    }
-    private fun isValidPw(pw : String) : Boolean {
-        return pw.length in 8..12
-    }
+    private fun isValidId(id : String) : Boolean = id.length in 6..10
+    private fun isValidPw(pw : String) : Boolean = pw.length in 8..12
 
     // 성공 여부 판단
     private fun checkSignup() {
@@ -32,14 +28,14 @@ class SignUpActivity : AppCompatActivity() {
         val pwText = binding.etSignupPw.text.toString()
         val mbtiText = binding.etSignupMbti.text.toString()
 
-        if (isValidId(idText) && isValidPw(pwText)) {
-            val info = User(nameText, idText, pwText, mbtiText)
-            intentToLogin(info)
-        } else if (isValidId(idText)) {
-            Snackbar.make(binding.root, R.string.sign_up_pw_fail, Snackbar.LENGTH_SHORT).show()
-        } else {
-            Snackbar.make(binding.root, R.string.sign_up_id_fail, Snackbar.LENGTH_SHORT).show()
+        if (!isValidId(idText)) {
+            return Snackbar.make(binding.root, R.string.sign_up_id_fail, Snackbar.LENGTH_SHORT).show()
         }
+        if (!isValidPw(pwText)) {
+            return Snackbar.make(binding.root, R.string.sign_up_pw_fail, Snackbar.LENGTH_SHORT).show()
+        }
+        val info = User(nameText, idText, pwText, mbtiText)
+        intentToLogin(info)
     }
 
     // 로그인 페이지로 이동
