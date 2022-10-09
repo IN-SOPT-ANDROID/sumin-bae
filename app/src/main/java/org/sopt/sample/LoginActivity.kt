@@ -11,7 +11,6 @@ import org.sopt.sample.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
-    // private var userInfo = arrayOf("", "", "", "")
     private var userInfo: User? = null
 
     // 회원가입 페이지에서 입력한 정보 가져오기
@@ -22,17 +21,7 @@ class LoginActivity : AppCompatActivity() {
             Snackbar.make(binding.root, R.string.sign_up_success, Snackbar.LENGTH_SHORT).show()
             val info : Intent? = result.data
             userInfo = info?.getSerializableExtra("info") as User
-            // val userName = info?.getStringExtra("name").toString()
-            //val userId = info?.getStringExtra("id").toString()
-            // val userPw = info?.getStringExtra("pw").toString()
-            // val userMbti = info?.getStringExtra("mbti").toString().uppercase()
-        // userInfo = arrayOf(userId, userPw, userName, userMbti)
         }
-    }
-
-    // 아이디 비밀번호 입력란이 비었는지 판단
-    private fun isEmpty(inputId : String, inputPw : String) : Boolean {
-        return inputId == "" && inputPw == ""
     }
 
     // 로그인 성공 여부 판단
@@ -42,9 +31,10 @@ class LoginActivity : AppCompatActivity() {
 
     // 홈 페이지로 이동
     private fun intentToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("name", userInfo?.name)
-        intent.putExtra("mbti", userInfo?.mbti)
+        val intent = Intent(this, HomeActivity::class.java).apply {
+            putExtra("name", userInfo?.name)
+            putExtra("mbti", userInfo?.mbti)
+        }
 
         setResult(RESULT_OK, intent)
         startActivity(intent)
@@ -56,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
         val inputId = binding.etLoginId.text.toString()
         val inputPw = binding.etLoginPw.text.toString()
 
-        if (isEmpty(inputId, inputPw)){
+        if (inputId.isEmpty() && inputPw.isEmpty()){
             Snackbar.make(binding.root, R.string.login_empty, Snackbar.LENGTH_SHORT).show()
         }
         else if (!isMember(inputId, inputPw, userInfo?.id, userInfo?.pw)) {

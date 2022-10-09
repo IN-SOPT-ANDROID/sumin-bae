@@ -35,7 +35,6 @@ class SignUpActivity : AppCompatActivity() {
         if (isValidId(idText) && isValidPw(pwText)) {
             val info = User(nameText, idText, pwText, mbtiText)
             intentToLogin(info)
-            //intentToLogin(nameText, idText, pwText, mbtiText)
         } else if (isValidId(idText)) {
             Snackbar.make(binding.root, R.string.sign_up_pw_fail, Snackbar.LENGTH_SHORT).show()
         } else {
@@ -45,22 +44,9 @@ class SignUpActivity : AppCompatActivity() {
 
     // 로그인 페이지로 이동
     private fun intentToLogin (user: User) {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.putExtra("info", user as java.io.Serializable)
-        setResult(RESULT_OK, intent)
-        finish()
-    }
-
-
-
-
-    private fun intentToLogintmp(name : String, id: String, pw: String, mbti : String) {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.putExtra("name", name)
-        intent.putExtra("id", id)
-        intent.putExtra("pw", pw)
-        intent.putExtra("mbti", mbti)
-
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            putExtra("info", user as java.io.Serializable)
+        }
         setResult(RESULT_OK, intent)
         finish()
     }
