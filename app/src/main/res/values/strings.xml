@@ -20,4 +20,11 @@
     <string name="sign_up_success">회원가입이 완료되었습니다!</string>
     <string name="home_name">이름:&#160;</string>
     <string name="home_mbti">MBTI:&#160;</string>
+
+    <string name="blue_header">파란색 계열 팔레트</string>
+    <string name="blue_name">Blue</string>
+    <string name="blue_hex">#0000FF</string>
+    <string name="home_menu">홈</string>
+    <string name="gallery_menu">갤러리</string>
+    <string name="search_menu">검색</string>
 </resources>

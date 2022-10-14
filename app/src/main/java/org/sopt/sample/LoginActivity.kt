@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
     // 홈 페이지로 이동
     private fun intentToHome() {
-        val intent = Intent(this, HomeActivity::class.java).apply {
+        val intent = Intent(this, MainActivity::class.java).apply {
             putExtra("name", userInfo?.name)
             putExtra("mbti", userInfo?.mbti)
         }
