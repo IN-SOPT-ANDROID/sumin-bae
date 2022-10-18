@@ -16,9 +16,9 @@ class ColorAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHol
         private val binding: ColorItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Color) {
-            binding.ivBlue.setImageDrawable(binding.root.context.getDrawable(data.image))
             binding.tvBlueName.text = data.name
             binding.tvBlueHex.text = data.hex
+            binding.ivBlue.setBackgroundColor(android.graphics.Color.parseColor(data.hex))
         }
     }
 

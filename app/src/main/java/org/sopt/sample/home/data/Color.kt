@@ -1,10 +1,6 @@
 package org.sopt.sample.home.data
 
-import androidx.annotation.DrawableRes
-
 data class Color(
-    @DrawableRes
-    val image: Int,
     val name: String,
     val hex: String,
 ) {
