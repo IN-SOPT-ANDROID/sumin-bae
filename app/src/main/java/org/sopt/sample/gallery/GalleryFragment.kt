@@ -11,7 +11,7 @@ import org.sopt.sample.databinding.FragmentGalleryBinding
 class GalleryFragment : Fragment() {
     private var _binding: FragmentGalleryBinding? = null
     private val binding: FragmentGalleryBinding
-        get() = requireNotNull(_binding) { "null입니다" }
+        get() = requireNotNull(_binding) { "value of _binding is null" }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,20 +22,8 @@ class GalleryFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(args: String) =
-            GalleryFragment().apply {
-                arguments = bundleOf("key" to args)
-            }
     }
 }

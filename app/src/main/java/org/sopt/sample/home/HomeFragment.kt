@@ -14,7 +14,7 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<HomeViewModel>()
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
-        get() = requireNotNull(_binding) { "null입니다" }
+        get() = requireNotNull(_binding) { "value of _binding is null" }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,13 +35,5 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(args: String) =
-            HomeFragment().apply {
-                arguments = bundleOf("key" to args)
-            }
     }
 }

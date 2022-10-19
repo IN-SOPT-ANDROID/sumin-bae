@@ -3,6 +3,9 @@ package org.sopt.sample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.findFragment
+import androidx.fragment.app.replace
 import org.sopt.sample.databinding.ActivityMainBinding
 import org.sopt.sample.gallery.GalleryFragment
 import org.sopt.sample.home.HomeFragment
@@ -15,26 +18,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.bnvMain.setOnItemSelectedListener {
-            changeFragment(it.itemId)
-            true
+        binding.bnvMain.setOnItemSelectedListener { menu ->
+            when(menu.itemId) {
+                R.id.home_menu -> changeFragment<HomeFragment>()
+                R.id.gallery_menu -> changeFragment<GalleryFragment>()
+                R.id.search_menu -> changeFragment<SearchFragment>()
+            }
+            return@setOnItemSelectedListener true
         }
-        changeFragment(R.id.home_menu)
+        changeFragment<HomeFragment>()
     }
 
-    private fun changeFragment(menuId: Int) {
-        val targetFragment = getFragment(menuId)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_main_container, targetFragment)
-            .commit()
-    }
-
-    private fun getFragment(menuId: Int): Fragment {
-        return when (menuId) {
-            R.id.home_menu -> HomeFragment.newInstance("home")
-            R.id.gallery_menu -> GalleryFragment.newInstance("gallery")
-            R.id.search_menu -> SearchFragment.newInstance("search")
-            else -> throw IllegalArgumentException("menu item not found")
+    private inline fun <reified T: Fragment> changeFragment() {
+        supportFragmentManager.commit {
+            replace<T>(R.id.fcv_main_container)
         }
     }
 }
