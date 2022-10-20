@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        changeFragment<HomeFragment>()
         binding.bnvMain.setOnItemSelectedListener { menu ->
             when(menu.itemId) {
                 R.id.home_menu -> changeFragment<HomeFragment>()
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
-        changeFragment<HomeFragment>()
     }
 
     private inline fun <reified T: Fragment> changeFragment() {

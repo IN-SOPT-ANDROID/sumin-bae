@@ -21,7 +21,7 @@
     <string name="home_name">이름:&#160;</string>
     <string name="home_mbti">MBTI:&#160;</string>
 
-    <string name="blue_header">파란색 계열 팔레트</string>
+    <string name="blue_header">Blue Palette</string>
     <string name="blue_name">Blue</string>
     <string name="blue_hex">#0000FF</string>
     <string name="home_menu">홈</string>
