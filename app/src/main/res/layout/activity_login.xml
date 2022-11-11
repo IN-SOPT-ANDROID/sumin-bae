@@ -64,22 +64,26 @@
 
     <Button
         android:id="@+id/btn_login_submit"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/login_submit"
-        app:layout_constraintEnd_toEndOf="@+id/et_login_pw"
-        app:layout_constraintStart_toStartOf="@+id/et_login_pw"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_pw" />
+        android:text="@string/login_submit" />
 
     <Button
         android:id="@+id/btn_to_signup"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/sign_up_title"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login_submit"
-        app:layout_constraintStart_toStartOf="@+id/btn_login_submit"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login_submit" />
+        android:text="@string/sign_up_title" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:constraint_referenced_ids="btn_login_submit,btn_to_signup"
+        app:flow_wrapMode="chain"
+        app:flow_horizontalGap="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_login_pw" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
