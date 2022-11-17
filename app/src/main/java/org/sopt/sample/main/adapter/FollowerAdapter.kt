@@ -1,4 +1,4 @@
-package org.sopt.sample.home.adapter
+package org.sopt.sample.main.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.sample.databinding.ColorItemBinding
 import org.sopt.sample.databinding.HeaderItemBinding
-import org.sopt.sample.home.data.Color
+import org.sopt.sample.data.local.Color
 
-class ColorAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FollowerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
     private var colorList: List<Color> = emptyList()
 

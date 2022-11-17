@@ -1,10 +1,9 @@
-package org.sopt.sample.home
+package org.sopt.sample.main.follower
 
 import androidx.lifecycle.ViewModel
-import org.sopt.sample.R
-import org.sopt.sample.home.data.Color
+import org.sopt.sample.data.local.Color
 
-class HomeViewModel : ViewModel() {
+class FollowerViewModel : ViewModel() {
     val blueColorList = listOf(
         Color(
             name = "Cold Mist",

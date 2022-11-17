@@ -1,11 +1,10 @@
-package org.sopt.sample.gallery
+package org.sopt.sample.main.gallery
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import org.sopt.sample.R
 import org.sopt.sample.databinding.FragmentGalleryBinding
 

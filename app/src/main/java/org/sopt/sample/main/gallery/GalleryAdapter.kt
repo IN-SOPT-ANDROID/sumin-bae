@@ -1,4 +1,4 @@
-package org.sopt.sample.gallery
+package org.sopt.sample.main.gallery
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

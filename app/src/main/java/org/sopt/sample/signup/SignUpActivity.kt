@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.databinding.ActivitySignUpBinding
+import org.sopt.sample.login.LoginActivity
 import java.io.Serializable
 
 data class User(

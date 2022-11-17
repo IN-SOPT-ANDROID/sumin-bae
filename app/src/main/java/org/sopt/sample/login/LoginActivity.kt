@@ -1,4 +1,4 @@
-package org.sopt.sample
+package org.sopt.sample.login
 
 import android.app.Activity
 import android.content.Intent
@@ -7,11 +7,22 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
+import org.sopt.sample.main.MainActivity
+import org.sopt.sample.R
+import org.sopt.sample.SignUpActivity
+import org.sopt.sample.User
+import org.sopt.sample.data.remote.RequestLogin
+import org.sopt.sample.data.remote.ResponseLogin
+import org.sopt.sample.data.remote.ServicePool
 import org.sopt.sample.databinding.ActivityLoginBinding
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private var userInfo: User? = null
+    private val loginService = ServicePool.loginService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +34,24 @@ class LoginActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
         binding.btnLoginSubmit.setOnClickListener {
-            executeLogin()
+            loginService.login(
+                RequestLogin(
+                    binding.etLoginId.text.toString(),
+                    binding.etLoginPw.text.toString()
+                )
+            ).enqueue(object : Callback<ResponseLogin> {
+                override fun onResponse(
+                    call: Call<ResponseLogin>,
+                    response: Response<ResponseLogin>
+                ) {
+                    startActivity(MainActivity.getIntent(this@LoginActivity))
+                }
+
+                override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity, "에러 발생", Toast.LENGTH_SHORT).show()
+                }
+            })
+//            executeLogin()
         }
     }
 
@@ -32,7 +60,6 @@ class LoginActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            Snackbar.make(binding.root, R.string.sign_up_success, Snackbar.LENGTH_SHORT).show()
             val info: Intent? = result.data
             userInfo = info?.getSerializableExtra("info") as User
         }
