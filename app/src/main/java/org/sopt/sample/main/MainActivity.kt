@@ -12,6 +12,7 @@ import org.sopt.sample.databinding.ActivityMainBinding
 import org.sopt.sample.login.LoginActivity
 import org.sopt.sample.main.follower.FollowerFragment
 import org.sopt.sample.main.gallery.GalleryFragment
+import org.sopt.sample.main.mypage.MyPageFragment
 import org.sopt.sample.main.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
@@ -33,9 +34,10 @@ class MainActivity : AppCompatActivity() {
         changeFragment<FollowerFragment>()
         binding.bnvMain.setOnItemSelectedListener { menu ->
             when(menu.itemId) {
-                R.id.home_menu -> changeFragment<FollowerFragment>()
-                R.id.gallery_menu -> changeFragment<GalleryFragment>()
-                R.id.search_menu -> changeFragment<SearchFragment>()
+                R.id.menu_follower -> changeFragment<FollowerFragment>()
+                R.id.menu_gallery -> changeFragment<GalleryFragment>()
+                R.id.menu_search -> changeFragment<SearchFragment>()
+                R.id.menu_mypage -> changeFragment<MyPageFragment>()
             }
             return@setOnItemSelectedListener true
         }
