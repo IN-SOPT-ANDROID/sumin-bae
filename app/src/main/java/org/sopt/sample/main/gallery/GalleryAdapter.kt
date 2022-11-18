@@ -3,7 +3,7 @@ package org.sopt.sample.main.gallery
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.sample.databinding.GalleryItemBinding
+import org.sopt.sample.databinding.ItemGalleryBinding
 
 class GalleryAdapter(
     initItems: List<Int> = listOf(),
@@ -16,7 +16,7 @@ class GalleryAdapter(
     }
 
     class GalleryViewHolder(
-        private val binding: GalleryItemBinding,
+        private val binding: ItemGalleryBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(src: Int) {
             binding.imgGallery.setImageResource(src)
@@ -24,7 +24,7 @@ class GalleryAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
-        val binding = GalleryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemGalleryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return GalleryViewHolder(binding)
     }
 

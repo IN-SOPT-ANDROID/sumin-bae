@@ -4,7 +4,7 @@
         android:id="@+id/menu_follower"
         android:icon="@drawable/ic_follower"
         android:iconTint="@color/black"
-        android:title="@string/home_menu" />
+        android:title="@string/follower_menu" />
     <item
         android:id="@+id/menu_gallery"
         android:icon="@drawable/ic_gallery"
