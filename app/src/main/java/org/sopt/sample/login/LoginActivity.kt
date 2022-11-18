@@ -61,22 +61,13 @@ class LoginActivity : AppCompatActivity() {
                 // 서버통신 실패
                 override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
                     Snackbar.make(binding.root, R.string.login_fail, Snackbar.LENGTH_SHORT).show()
-                    Log.e("failed login", "cause: " + t.cause)
-                    Log.e("failed login", "message: " + t.message)
                 }
             })
         }
         binding.btnToSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
-            clearInput()
         }
-    }
-
-    // 입력창 텍스트 제거
-    private fun clearInput() {
-        binding.etLoginEmail.text.clear()
-        binding.etLoginPw.text.clear()
     }
 
     // 홈 페이지로 이동

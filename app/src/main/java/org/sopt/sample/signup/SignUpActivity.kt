@@ -1,62 +1,92 @@
-package org.sopt.sample
+package org.sopt.sample.signup
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import org.sopt.sample.R
+import org.sopt.sample.data.remote.RequestSignUpDto
+import org.sopt.sample.data.remote.ResponseSignUpDto
+import org.sopt.sample.data.remote.ServicePool
 import org.sopt.sample.databinding.ActivitySignUpBinding
 import org.sopt.sample.login.LoginActivity
-import java.io.Serializable
-
-data class User(
-    val name: String,
-    val id: String,
-    val pw: String,
-    val mbti: String
-) : Serializable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
+    private val loginService = ServicePool.loginService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnSignupSubmit.isEnabled = false
+        checkSignup()
         binding.btnSignupSubmit.setOnClickListener {
-            checkSignup()
+            loginService.signup(
+                RequestSignUpDto(
+                    binding.etSignupEmail.text.toString(),
+                    binding.etSignupPw.text.toString(),
+                    binding.etSignupName.text.toString()
+                )
+            ).enqueue(object : Callback<ResponseSignUpDto> {
+                // 서버통신 성공
+                override fun onResponse(
+                    call: Call<ResponseSignUpDto>,
+                    response: Response<ResponseSignUpDto>,
+                ) {
+                    // 회원가입 성공
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@SignUpActivity, R.string.sign_up_success, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@SignUpActivity, LoginActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        }
+                        startActivity(intent)
+                    }
+                    // 회원가입 실패 (중복)
+                    else {
+                        Snackbar.make(binding.root, R.string.sign_up_duplicate, Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+                // 서버통신 실패
+                override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
+                    Snackbar.make(binding.root, R.string.sign_up_fail, Snackbar.LENGTH_SHORT).show()
+                }
+
+            })
         }
     }
 
-    // 회원가입 성공 조건
-    private fun isValidId(id: String): Boolean = id.length in 6..10
-    private fun isValidPw(pw: String): Boolean = pw.length in 8..12
-
-    // 성공 여부 판단
+    // 모든 입력값이 올바른지 확인
     private fun checkSignup() {
-        val nameText = binding.etSignupName.text.toString()
-        val idText = binding.etSignupId.text.toString()
-        val pwText = binding.etSignupPw.text.toString()
-        val mbtiText = binding.etSignupMbti.text.toString()
-
-        if (!isValidId(idText)) {
-            return Snackbar.make(binding.root, R.string.sign_up_id_fail, Snackbar.LENGTH_SHORT)
-                .show()
-        }
-        if (!isValidPw(pwText)) {
-            return Snackbar.make(binding.root, R.string.sign_up_pw_fail, Snackbar.LENGTH_SHORT)
-                .show()
-        }
-        val info = User(nameText, idText, pwText, mbtiText)
-        intentToLogin(info)
+        binding.etSignupEmail.addTextChangedListener(textWatcher)
+        binding.etSignupPw.addTextChangedListener(textWatcher)
+        binding.etSignupName.addTextChangedListener(textWatcher)
     }
 
-    // 로그인 페이지로 이동
-    private fun intentToLogin(user: User) {
-        val intent = Intent(this, LoginActivity::class.java).apply {
-            putExtra("info", user as java.io.Serializable)
+    // 회원가입 버튼 클릭 활성화
+    private val textWatcher = object : TextWatcher {
+
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        override fun afterTextChanged(p0: Editable?) {
+            val email = binding.etSignupEmail.text
+            val pw = binding.etSignupPw.text
+            val name = binding.etSignupName.text
+
+            binding.btnSignupSubmit.isEnabled =
+                email.isNotEmpty()
+                        && (pw.isNotEmpty() && pw.toString().length in 8..12)
+                        && name.isNotEmpty()
         }
-        setResult(RESULT_OK, intent)
-        finish()
     }
 }
+
