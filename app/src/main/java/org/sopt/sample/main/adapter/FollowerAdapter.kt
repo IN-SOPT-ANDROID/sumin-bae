@@ -4,57 +4,65 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.sample.databinding.ColorItemBinding
-import org.sopt.sample.databinding.HeaderItemBinding
-import org.sopt.sample.data.local.Color
+import com.bumptech.glide.Glide
+import org.sopt.sample.data.remote.ResponseFollowerListDto
+import org.sopt.sample.databinding.ItemFollowerBinding
+import org.sopt.sample.databinding.ItemFollowerHeaderBinding
 
 class FollowerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
-    private var colorList: List<Color> = emptyList()
+    private var followerList: List<ResponseFollowerListDto.Data> = emptyList()
 
-    class ColorViewHolder(
-        private val binding: ColorItemBinding,
+    class FollowerViewHolder(
+        private val binding: ItemFollowerBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Color) {
-            binding.tvBlueName.text = data.name
-            binding.tvBlueHex.text = data.hex
-            binding.ivBlue.setBackgroundColor(android.graphics.Color.parseColor(data.hex))
+        fun onBind(data: ResponseFollowerListDto.Data) {
+            binding.tvFollowerName.text = data.first_name
+            binding.tvFollowerEmail.text = data.email
+            Glide.with(this.binding.root)
+                .load(data.avatar)
+                .into(binding.ivFollower)
         }
     }
 
     class HeaderViewHolder(
-        private val binding: HeaderItemBinding,
+        private val binding: ItemFollowerHeaderBinding,
     ) : RecyclerView.ViewHolder(binding.root) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            Color.TYPE_HEADER -> {
-                val binding = HeaderItemBinding.inflate(inflater, parent, false)
+            TYPE_HEADER -> {
+                val binding = ItemFollowerHeaderBinding.inflate(inflater, parent, false)
                 HeaderViewHolder(binding)
             }
-            Color.TYPE_COLOR -> {
-                val binding = ColorItemBinding.inflate(inflater, parent, false)
-                ColorViewHolder(binding)
+            TYPE_FOLLOWER -> {
+                val binding = ItemFollowerBinding.inflate(inflater, parent, false)
+                FollowerViewHolder(binding)
             }
             else -> throw IllegalArgumentException("view type not found")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is ColorViewHolder) holder.onBind(colorList[position - 1])
+        if (holder is FollowerViewHolder) holder.onBind(followerList[position - 1])
     }
 
-    override fun getItemCount() = colorList.size + 1
+    override fun getItemCount() = followerList.size + 1
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
-            0 -> Color.TYPE_HEADER
-            else -> Color.TYPE_COLOR
+            0 -> TYPE_HEADER
+            else -> TYPE_FOLLOWER
         }
     }
 
-    fun setColorList(list: List<Color>) {
-        this.colorList = list.toList()
+    fun setFollowerList(list: List<ResponseFollowerListDto.Data>) {
+        this.followerList = list.toList()
         notifyDataSetChanged()
+    }
+
+    companion object {
+        const val TYPE_HEADER = 0
+        const val TYPE_FOLLOWER = 1
     }
 }

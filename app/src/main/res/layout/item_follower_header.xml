@@ -11,7 +11,7 @@
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="20dp"
-        android:text="@string/blue_header"
+        android:text="@string/follower_header"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />

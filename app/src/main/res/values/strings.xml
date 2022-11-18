@@ -24,11 +24,8 @@
     <string name="sign_up_fail">회원가입에 실패했습니다</string>
     <string name="sign_up_success">회원가입이 완료되었습니다!</string>
     <!--    MainActivity-->
-    <!--    <string name="home_name">이름:&#160;</string>-->
-    <!--    <string name="home_mbti">MBTI:&#160;</string>-->
-    <string name="blue_header">Blue Palette</string>
-    <string name="blue_name">Blue</string>
-    <string name="blue_hex">#0000FF</string>
+    <string name="follower_header">Follower List</string>
+    <string name="follower_fail">팔로워 목록을 불러오는데 실패했습니다</string>
     <string name="my_page_logout">로그아웃</string>
     <string name="logout_success">로그아웃 되었습니다</string>
     <string name="follower_menu">팔로워</string>
