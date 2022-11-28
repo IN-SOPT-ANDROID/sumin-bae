@@ -3,12 +3,11 @@ package org.sopt.sample.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.main.MainActivity
 import org.sopt.sample.R
-import org.sopt.sample.data.local.SeminarApp
+import org.sopt.sample.main.SeminarApp
 import org.sopt.sample.signup.SignUpActivity
 import org.sopt.sample.data.remote.RequestLoginDto
 import org.sopt.sample.data.remote.ResponseLoginDto

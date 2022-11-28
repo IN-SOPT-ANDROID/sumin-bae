@@ -1,13 +1,16 @@
-package org.sopt.sample.data.local
+package org.sopt.sample.main
 
 import android.app.Application
+import org.sopt.sample.data.local.PreferenceUtil
 
 class SeminarApp : Application() {
-    companion object {
-        lateinit var prefs: PreferenceUtil
-    }
+
     override fun onCreate() {
         prefs = PreferenceUtil(applicationContext)
         super.onCreate()
+    }
+
+    companion object {
+        lateinit var prefs: PreferenceUtil
     }
 }
