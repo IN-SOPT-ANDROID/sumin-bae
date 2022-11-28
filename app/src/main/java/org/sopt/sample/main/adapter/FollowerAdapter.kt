@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import org.sopt.sample.data.remote.ResponseFollowerListDto
 import org.sopt.sample.databinding.ItemFollowerBinding
 import org.sopt.sample.databinding.ItemFollowerHeaderBinding
@@ -19,9 +19,7 @@ class FollowerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         fun onBind(data: ResponseFollowerListDto.Data) {
             binding.tvFollowerName.text = data.first_name
             binding.tvFollowerEmail.text = data.email
-            Glide.with(this.binding.root)
-                .load(data.avatar)
-                .into(binding.ivFollower)
+            binding.ivFollower.load(data.avatar)
         }
     }
 
