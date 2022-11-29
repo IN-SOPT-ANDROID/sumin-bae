@@ -4,6 +4,9 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.10'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'org.sopt.sample'
     compileSdk 33
@@ -16,6 +19,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL_LOGIN", properties["base.url.login"]
+        buildConfigField "String", "BASE_URL_FOLLOWER", properties["base.url.follower"]
     }
 
     buildTypes {
