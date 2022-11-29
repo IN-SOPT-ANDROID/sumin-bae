@@ -1,4 +1,4 @@
-package org.sopt.sample.main
+package org.sopt.sample
 
 import android.app.Application
 import org.sopt.sample.data.local.PreferenceUtil

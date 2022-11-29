@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import org.sopt.sample.R
+import org.sopt.sample.SeminarApp
 import org.sopt.sample.databinding.ActivityMainBinding
 import org.sopt.sample.login.LoginActivity
 import org.sopt.sample.main.follower.FollowerFragment
