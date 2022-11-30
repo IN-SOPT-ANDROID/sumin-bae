@@ -11,13 +11,13 @@ import org.sopt.sample.databinding.ItemFollowerHeaderBinding
 
 class FollowerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
-    private var followerList: List<ResponseFollowerListDto.Data> = emptyList()
+    private var followerList: List<ResponseFollowerListDto.Follower> = emptyList()
 
     class FollowerViewHolder(
         private val binding: ItemFollowerBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ResponseFollowerListDto.Data) {
-            binding.tvFollowerName.text = data.first_name
+        fun onBind(data: ResponseFollowerListDto.Follower) {
+            binding.tvFollowerName.text = data.firstName
             binding.tvFollowerEmail.text = data.email
             binding.ivFollower.load(data.avatar)
         }
@@ -54,7 +54,7 @@ class FollowerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    fun setFollowerList(list: List<ResponseFollowerListDto.Data>) {
+    fun setFollowerList(list: List<ResponseFollowerListDto.Follower>) {
         this.followerList = list.toList()
         notifyDataSetChanged()
     }

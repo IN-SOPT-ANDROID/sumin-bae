@@ -10,7 +10,6 @@ import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.R
 import org.sopt.sample.data.remote.ResponseFollowerListDto
 import org.sopt.sample.data.remote.ServicePool
-import org.sopt.sample.data.remote.ServicePool.followerService
 import org.sopt.sample.databinding.FragmentFollowerBinding
 import org.sopt.sample.main.adapter.FollowerAdapter
 import retrofit2.Call
@@ -41,14 +40,14 @@ class FollowerFragment : Fragment() {
     }
 
     private fun showFollower(page: Int) {
-        followerService.getList(page)
+        followerService.getUserList(page)
             .enqueue(object : Callback<ResponseFollowerListDto> {
                 override fun onResponse(
                     call: Call<ResponseFollowerListDto>,
                     response: Response<ResponseFollowerListDto>,
                 ) {
                     if (response.isSuccessful) {
-                        viewModel.followerList.addAll(response.body()!!.data)
+                        response.body()?.let { viewModel.followerList.addAll(it.data) }
 
                         val adapter = FollowerAdapter(requireContext())
                         binding.rvFollowers.adapter = adapter

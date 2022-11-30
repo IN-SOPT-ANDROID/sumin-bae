@@ -5,17 +5,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseSignUpDto(
-    @SerialName("message") val message: String,
-    @SerialName("newUser") val newUser: NewUser,
-    @SerialName("status") val status: Int
+    val message: String,
+    val newUser: NewUser,
+    val status: Int
 ) {
     @Serializable
     data class NewUser(
-        @SerialName("bio") val bio: String?,
-        @SerialName("email") val email: String,
-        @SerialName("id") val id: Int,
-        @SerialName("name") val name: String,
-        @SerialName("password") val password: String,
-        @SerialName("profileImage") val profileImage: String?
+        val bio: String?,
+        val email: String,
+        val id: Int,
+        val name: String,
+        @SerialName("password") val pw: String,
+        @SerialName("profileImage") val image: String?
     )
 }
