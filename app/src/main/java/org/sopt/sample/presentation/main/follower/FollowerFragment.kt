@@ -1,11 +1,13 @@
 package org.sopt.sample.presentation.main.follower
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.R
 import org.sopt.sample.data.model.response.ResponseFollowerListDto
@@ -34,13 +36,7 @@ class FollowerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        for (i in 1..2) {
-            showFollower(i)
-        }
-    }
-
-    private fun showFollower(page: Int) {
-        followerService.getUserList(page)
+        followerService.getUserList()
             .enqueue(object : Callback<ResponseFollowerListDto> {
                 override fun onResponse(
                     call: Call<ResponseFollowerListDto>,
@@ -52,13 +48,28 @@ class FollowerFragment : Fragment() {
                         val adapter = FollowerAdapter(requireContext())
                         binding.rvFollowers.adapter = adapter
                         adapter.setFollowerList(viewModel.followerList)
-                    }
-                    else {
-                        Snackbar.make(binding.root, R.string.follower_fail, Snackbar.LENGTH_SHORT).show()
+
+                        val gridLayoutManager = GridLayoutManager(activity, 2)
+                        gridLayoutManager.spanSizeLookup = object : SpanSizeLookup() {
+                            override fun getSpanSize(position: Int): Int {
+                                return when (adapter.getItemViewType(position)) {
+                                    0 -> 2
+                                    else -> 1
+                                }
+                            }
+
+                        }
+                        binding.rvFollowers.layoutManager = gridLayoutManager
+                    } else {
+                        Snackbar.make(binding.root, R.string.follower_fail, Snackbar.LENGTH_SHORT)
+                            .show()
                     }
                 }
+
                 override fun onFailure(call: Call<ResponseFollowerListDto>, t: Throwable) {
-                    Snackbar.make(binding.root, R.string.follower_fail, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root,
+                        R.string.follower_network_fail,
+                        Snackbar.LENGTH_SHORT).show()
                 }
             })
     }

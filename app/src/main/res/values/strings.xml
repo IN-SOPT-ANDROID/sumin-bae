@@ -26,6 +26,7 @@
     <!--    MainActivity-->
     <string name="follower_header">Follower List</string>
     <string name="follower_fail">팔로워 목록을 불러오는데 실패했습니다</string>
+    <string name="follower_network_fail">네트워크 연결에 문제가 있습니다</string>
     <string name="my_page_logout">로그아웃</string>
     <string name="logout_success">로그아웃 되었습니다</string>
     <string name="follower_menu">팔로워</string>

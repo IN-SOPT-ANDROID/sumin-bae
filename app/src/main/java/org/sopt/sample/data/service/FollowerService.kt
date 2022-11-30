@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface FollowerService {
     @GET("/api/users?")
     fun getUserList(
-        @Query("page") index: Int
+        @Query("per_page") index: Int = 12
     ): Call<ResponseFollowerListDto>
 }
