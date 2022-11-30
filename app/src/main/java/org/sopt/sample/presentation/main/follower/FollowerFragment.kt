@@ -1,4 +1,4 @@
-package org.sopt.sample.main.follower
+package org.sopt.sample.presentation.main.follower
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.R
-import org.sopt.sample.data.remote.ResponseFollowerListDto
-import org.sopt.sample.data.remote.ServicePool
+import org.sopt.sample.data.model.response.ResponseFollowerListDto
+import org.sopt.sample.data.service.ServicePool
 import org.sopt.sample.databinding.FragmentFollowerBinding
-import org.sopt.sample.main.adapter.FollowerAdapter
+import org.sopt.sample.presentation.main.adapter.FollowerAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

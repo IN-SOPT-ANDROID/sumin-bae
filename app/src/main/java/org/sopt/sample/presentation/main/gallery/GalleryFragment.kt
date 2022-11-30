@@ -1,4 +1,4 @@
-package org.sopt.sample.main.gallery
+package org.sopt.sample.presentation.main.gallery
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

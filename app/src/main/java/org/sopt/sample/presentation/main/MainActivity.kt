@@ -1,4 +1,4 @@
-package org.sopt.sample.main
+package org.sopt.sample.presentation.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,11 +9,11 @@ import androidx.fragment.app.replace
 import org.sopt.sample.R
 import org.sopt.sample.SeminarApp
 import org.sopt.sample.databinding.ActivityMainBinding
-import org.sopt.sample.login.LoginActivity
-import org.sopt.sample.main.follower.FollowerFragment
-import org.sopt.sample.main.gallery.GalleryFragment
-import org.sopt.sample.main.mypage.MyPageFragment
-import org.sopt.sample.main.search.SearchFragment
+import org.sopt.sample.presentation.login.LoginActivity
+import org.sopt.sample.presentation.main.follower.FollowerFragment
+import org.sopt.sample.presentation.main.gallery.GalleryFragment
+import org.sopt.sample.presentation.main.mypage.MyPageFragment
+import org.sopt.sample.presentation.main.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

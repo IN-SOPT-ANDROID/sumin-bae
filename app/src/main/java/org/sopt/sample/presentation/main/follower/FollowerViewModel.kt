@@ -1,7 +1,7 @@
-package org.sopt.sample.main.follower
+package org.sopt.sample.presentation.main.follower
 
 import androidx.lifecycle.ViewModel
-import org.sopt.sample.data.remote.ResponseFollowerListDto
+import org.sopt.sample.data.model.response.ResponseFollowerListDto
 
 class FollowerViewModel : ViewModel() {
     val followerList = mutableListOf<ResponseFollowerListDto.Follower>()

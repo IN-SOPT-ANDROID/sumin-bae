@@ -1,11 +1,11 @@
-package org.sopt.sample.main.adapter
+package org.sopt.sample.presentation.main.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import org.sopt.sample.data.remote.ResponseFollowerListDto
+import org.sopt.sample.data.model.response.ResponseFollowerListDto
 import org.sopt.sample.databinding.ItemFollowerBinding
 import org.sopt.sample.databinding.ItemFollowerHeaderBinding
 

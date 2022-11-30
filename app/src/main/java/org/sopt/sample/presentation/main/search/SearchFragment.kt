@@ -1,4 +1,4 @@
-package org.sopt.sample.main.search
+package org.sopt.sample.presentation.main.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,7 +1,7 @@
 package org.sopt.sample
 
 import android.app.Application
-import org.sopt.sample.data.local.PreferenceUtil
+import org.sopt.sample.util.PreferenceUtil
 
 class SeminarApp : Application() {
 

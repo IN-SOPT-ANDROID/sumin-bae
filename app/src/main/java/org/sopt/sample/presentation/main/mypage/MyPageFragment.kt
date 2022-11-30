@@ -1,4 +1,4 @@
-package org.sopt.sample.main.mypage
+package org.sopt.sample.presentation.main.mypage
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import org.sopt.sample.R
 import org.sopt.sample.SeminarApp
 import org.sopt.sample.databinding.FragmentMyPageBinding
-import org.sopt.sample.login.LoginActivity
+import org.sopt.sample.presentation.login.LoginActivity
 
 class MyPageFragment : Fragment() {
     private var _binding: FragmentMyPageBinding? = null
