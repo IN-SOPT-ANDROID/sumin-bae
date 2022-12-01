@@ -33,11 +33,7 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnMypageLogout.setOnClickListener {
             Toast.makeText(activity, R.string.logout_success, Toast.LENGTH_SHORT).show()
-            SeminarApp.prefs.apply {
-                setString("email", "")
-                setString("pw", "")
-                setString("name", "")
-            }
+            SeminarApp.prefs.clear()
             val intent = Intent(activity, LoginActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }

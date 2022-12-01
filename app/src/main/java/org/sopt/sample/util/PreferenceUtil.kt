@@ -14,4 +14,12 @@ class PreferenceUtil(context: Context) {
     fun setString(key: String, str: String) {
         prefs.edit().putString(key, str).apply()
     }
+
+    fun isSignedIn(): Boolean {
+        return prefs.contains("email")
+    }
+
+    fun clear() {
+        prefs.edit().clear().apply()
+    }
 }

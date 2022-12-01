@@ -1,8 +1,8 @@
 package org.sopt.sample.presentation.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 로그인하지 않은 상태이면 로그인 페이지로 이동
-        if (SeminarApp.prefs.getString("email", "") == "") {
+        if (!SeminarApp.prefs.isSignedIn()) {
             val intent = Intent(this, LoginActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         // 프래그먼트 전환
         changeFragment<FollowerFragment>()
         binding.bnvMain.setOnItemSelectedListener { menu ->
-            when(menu.itemId) {
+            when (menu.itemId) {
                 R.id.menu_follower -> changeFragment<FollowerFragment>()
                 R.id.menu_gallery -> changeFragment<GalleryFragment>()
                 R.id.menu_search -> changeFragment<SearchFragment>()
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private inline fun <reified T: Fragment> changeFragment() {
+    private inline fun <reified T : Fragment> changeFragment() {
         supportFragmentManager.commit {
             replace<T>(R.id.fcv_main_container)
         }
