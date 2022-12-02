@@ -1,120 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.signup.SignUpActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_signup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/sign_up_title"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/tv_signup_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/login_id"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_title" />
+        <import type="android.view.View" />
 
-    <EditText
-        android:id="@+id/et_signup_id"
+        <variable
+            name="signup"
+            type="org.sopt.sample.presentation.signup.SignUpViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/login_id_hint"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_id" />
+        android:layout_height="match_parent"
+        tools:context=".presentation.signup.SignUpActivity">
 
-    <TextView
-        android:id="@+id/tv_signup_error_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up_error_id"
-        android:textColor="@color/red_500"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/et_signup_id"
-        app:layout_constraintStart_toStartOf="@+id/et_signup_id"
-        app:layout_constraintTop_toBottomOf="@+id/et_signup_id" />
+        <TextView
+            android:id="@+id/tv_signup_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/sign_up_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_signup_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/login_pw"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/et_signup_id"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_error_id" />
+        <TextView
+            android:id="@+id/tv_signup_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="60dp"
+            android:text="@string/login_id"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_title" />
 
-    <EditText
-        android:id="@+id/et_signup_pw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/login_pw_hint"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw" />
+        <EditText
+            android:id="@+id/et_signup_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@{(signup.isValidId || signup.inputId.isEmpty()) ? @color/black : @color/red_500}"
+            android:hint="@string/login_id_hint"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:text="@={signup.inputId}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_id" />
 
-    <TextView
-        android:id="@+id/tv_signup_error_pw"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up_error_pw"
-        android:textColor="@color/red_500"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/et_signup_pw"
-        app:layout_constraintStart_toStartOf="@+id/et_signup_pw"
-        app:layout_constraintTop_toBottomOf="@+id/et_signup_pw" />
+        <TextView
+            android:id="@+id/tv_signup_error_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_error_id"
+            android:textColor="@color/red_500"
+            android:textSize="12sp"
+            android:visibility="@{(signup.isValidId || signup.inputId.isEmpty()) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@+id/et_signup_id"
+            app:layout_constraintStart_toStartOf="@+id/et_signup_id"
+            app:layout_constraintTop_toBottomOf="@+id/et_signup_id" />
 
-    <TextView
-        android:id="@+id/tv_signup_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/sign_up_name"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/et_signup_pw"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_error_pw" />
+        <TextView
+            android:id="@+id/tv_signup_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/login_pw"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/et_signup_id"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_error_id" />
 
-    <EditText
-        android:id="@+id/et_signup_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/sign_up_name_hint"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_name" />
+        <EditText
+            android:id="@+id/et_signup_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@{(signup.isValidPw || signup.inputPw.isEmpty()) ? @color/black : @color/red_500}"
+            android:hint="@string/login_pw_hint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:text="@={signup.inputPw}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw" />
 
-    <Button
-        android:id="@+id/btn_signup_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="45dp"
-        android:text="@string/sign_up_submit"
-        app:layout_constraintTop_toBottomOf="@+id/et_signup_name" />
+        <TextView
+            android:id="@+id/tv_signup_error_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_error_pw"
+            android:textColor="@color/red_500"
+            android:textSize="12sp"
+            android:visibility="@{(signup.isValidPw || signup.inputPw.isEmpty()) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@+id/et_signup_pw"
+            app:layout_constraintStart_toStartOf="@+id/et_signup_pw"
+            app:layout_constraintTop_toBottomOf="@+id/et_signup_pw" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_signup_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/sign_up_name"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/et_signup_pw"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_error_pw" />
+
+        <EditText
+            android:id="@+id/et_signup_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/sign_up_name_hint"
+            android:inputType="text"
+            android:text="@={signup.inputName}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_name" />
+
+        <Button
+            android:id="@+id/btn_signup_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="45dp"
+            android:enabled="@{!signup.inputId.isEmpty() &amp;&amp; !signup.inputPw.isEmpty() &amp;&amp; signup.isValidId &amp;&amp; signup.isValidPw &amp;&amp; signup.isValidName}"
+            android:text="@string/sign_up_submit"
+            app:layout_constraintTop_toBottomOf="@+id/et_signup_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
