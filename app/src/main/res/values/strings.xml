@@ -12,6 +12,8 @@
     <string name="login_wrong_input">아이디 또는 비밀번호를 잘못 입력했습니다</string>
     <string name="login_success">로그인에 성공했습니다!</string>
     <string name="login_fail">로그인에 실패했습니다</string>
+    <string name="login_request_fail">로그인 요청에 실패했습니다</string>
+    <string name="login_server_fail">서버에 문제가 발생했습니다</string>
     <!--    SignUpActivity-->
     <string name="sign_up_title">SIGNUP</string>
     <string name="sign_up_name">이름</string>
