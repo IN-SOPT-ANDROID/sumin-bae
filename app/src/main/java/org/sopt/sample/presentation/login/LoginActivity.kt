@@ -20,17 +20,17 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLoginSubmit.setOnClickListener {
-            val inputEmail = binding.etLoginEmail.text
+            val inputId = binding.etLoginId.text
             val inputPw = binding.etLoginPw.text
 
             // 입력칸이 비었을 때
-            if (inputEmail.isEmpty() || inputPw.isEmpty()) {
+            if (inputId.isEmpty() || inputPw.isEmpty()) {
                 Snackbar.make(binding.root, R.string.login_empty, Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             viewModel.login(
-                binding.etLoginEmail.text.toString(),
+                binding.etLoginId.text.toString(),
                 binding.etLoginPw.text.toString()
             )
         }

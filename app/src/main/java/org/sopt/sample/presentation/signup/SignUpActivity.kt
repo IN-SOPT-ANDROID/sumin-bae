@@ -31,7 +31,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.btnSignupSubmit.setOnClickListener {
             loginService.signup(
                 RequestSignUpDto(
-                    binding.etSignupEmail.text.toString(),
+                    binding.etSignupId.text.toString(),
                     binding.etSignupPw.text.toString(),
                     binding.etSignupName.text.toString()
                 )
@@ -65,7 +65,7 @@ class SignUpActivity : AppCompatActivity() {
 
     // 모든 입력값이 올바른지 확인
     private fun checkSignup() {
-        binding.etSignupEmail.addTextChangedListener(textWatcher)
+        binding.etSignupId.addTextChangedListener(textWatcher)
         binding.etSignupPw.addTextChangedListener(textWatcher)
         binding.etSignupName.addTextChangedListener(textWatcher)
     }
@@ -78,12 +78,12 @@ class SignUpActivity : AppCompatActivity() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
         override fun afterTextChanged(p0: Editable?) {
-            val email = binding.etSignupEmail.text
+            val id = binding.etSignupId.text
             val pw = binding.etSignupPw.text
             val name = binding.etSignupName.text
 
             binding.btnSignupSubmit.isEnabled =
-                email.isNotEmpty()
+                id.isNotEmpty()
                         && (pw.isNotEmpty() && pw.toString().length in 8..12)
                         && name.isNotEmpty()
         }

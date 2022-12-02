@@ -23,10 +23,10 @@ class LoginViewModel : ViewModel() {
 
     private val loginService = ServicePool.loginService
 
-    fun login(email: String, password: String) {
+    fun login(id: String, password: String) {
         loginService.login(
             RequestLoginDto(
-                email, password
+                id, password
             )
         ).enqueue(object : Callback<ResponseLoginDto> {
             override fun onResponse(
@@ -37,7 +37,7 @@ class LoginViewModel : ViewModel() {
                     _loginResult.value = response.body()
                     response.body()?.result?.let {
                         SeminarApp.prefs.apply {
-                            setString("email", it.email)
+                            setString("id", it.email)
                             setString("pw", it.pw)
                             setString("name", it.name)
                         }

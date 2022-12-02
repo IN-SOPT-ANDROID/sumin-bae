@@ -16,7 +16,7 @@ class PreferenceUtil(context: Context) {
     }
 
     fun isSignedIn(): Boolean {
-        return prefs.contains("email")
+        return prefs.contains("id")
     }
 
     fun clear() {

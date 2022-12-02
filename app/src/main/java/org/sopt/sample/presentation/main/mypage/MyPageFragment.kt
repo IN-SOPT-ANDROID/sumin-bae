@@ -24,7 +24,7 @@ class MyPageFragment : Fragment() {
     ): View {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
         binding.tvMypageName.text = SeminarApp.prefs.getString("name", "")
-        binding.tvMypageEmail.text = SeminarApp.prefs.getString("email", "")
+        binding.tvMypageId.text = SeminarApp.prefs.getString("id", "")
 
         return binding.root
     }
