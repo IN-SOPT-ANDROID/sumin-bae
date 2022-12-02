@@ -10,9 +10,8 @@ import org.sopt.sample.data.service.ServicePool
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.regex.Pattern
 
-class SignUpViewModel: ViewModel() {
+class SignUpViewModel : ViewModel() {
     val inputId = MutableLiveData<String>()
     val inputPw = MutableLiveData<String>()
     val inputName = MutableLiveData<String>()
@@ -25,10 +24,12 @@ class SignUpViewModel: ViewModel() {
         val idPattern = "^(?=.*[A-Za-z])(?=.*[0-9]).{6,10}\$"
         return id.matches(idPattern.toRegex())
     }
+
     private fun checkPw(pw: String): Boolean {
         val pwPattern = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#\$%^&*]).{6,12}\$"
         return pw.matches(pwPattern.toRegex())
     }
+
     private fun checkName(name: String): Boolean {
         return name.isNotEmpty()
     }
