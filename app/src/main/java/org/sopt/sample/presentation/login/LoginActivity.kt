@@ -21,8 +21,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        addListeners()
+        // 로그인한 상태이면 메인 페이지로 이동
+        viewModel.autoLogin()
+
         addObservers()
+        addListeners()
     }
 
     private fun addListeners() {
@@ -48,20 +51,30 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun addObservers() {
+        viewModel.isLogin.observe(this) {
+            if (it) {
+                intentToHome()
+            }
+        }
         viewModel.loginResult.observe(this) {
             when(it) {
-                UiState.Success -> intentToHome()
+                UiState.Success -> {
+                    showSuccessToast()
+                    intentToHome()
+                }
                 UiState.Failure -> Snackbar.make(binding.root, R.string.login_wrong_input, Snackbar.LENGTH_SHORT).show()
                 UiState.Error -> Snackbar.make(binding.root, R.string.login_request_fail, Snackbar.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun intentToHome() {
+    fun showSuccessToast() {
         Toast.makeText(this@LoginActivity,
             R.string.login_success,
             Toast.LENGTH_SHORT).show()
+    }
 
+    private fun intentToHome() {
         val intent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

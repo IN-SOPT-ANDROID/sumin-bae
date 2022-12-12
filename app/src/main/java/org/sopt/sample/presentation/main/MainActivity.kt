@@ -22,13 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // 로그인하지 않은 상태이면 로그인 페이지로 이동
-        if (!SeminarApp.prefs.isSignedIn()) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
         // 프래그먼트 전환
         changeFragment<FollowerFragment>()
         binding.bnvMain.setOnItemSelectedListener { menu ->

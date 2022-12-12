@@ -18,7 +18,17 @@ class LoginViewModel : ViewModel() {
     val loginResult: LiveData<UiState>
         get() = _loginResult
 
+    private val _isLogin = MutableLiveData<Boolean>()
+    val isLogin: LiveData<Boolean>
+        get() = _isLogin
+
     private val loginService = ServicePool.loginService
+
+
+    // functions
+    fun autoLogin() {
+        _isLogin.value = SeminarApp.prefs.isSignedIn()
+    }
 
     fun login(id: String, password: String) {
         loginService.login(
