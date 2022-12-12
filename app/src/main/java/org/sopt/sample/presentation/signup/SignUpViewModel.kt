@@ -7,14 +7,15 @@ import androidx.lifecycle.ViewModel
 import org.sopt.sample.data.model.request.RequestSignUpDto
 import org.sopt.sample.data.model.response.ResponseSignUpDto
 import org.sopt.sample.data.service.ServicePool
+import org.sopt.sample.data.service.UiState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpViewModel : ViewModel() {
-    val inputId = MutableLiveData<String>()
-    val inputPw = MutableLiveData<String>()
-    val inputName = MutableLiveData<String>()
+    val inputId = MutableLiveData("")
+    val inputPw = MutableLiveData("")
+    val inputName = MutableLiveData("")
 
     val isValidId = Transformations.map(inputId) { id -> checkId(id) }
     val isValidPw = Transformations.map(inputPw) { pw -> checkPw(pw) }
@@ -34,9 +35,9 @@ class SignUpViewModel : ViewModel() {
         return name.isNotEmpty()
     }
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String>
-        get() = _errorMessage
+    private val _signupResult = MutableLiveData<UiState>()
+    val signupResult: LiveData<UiState>
+        get() = _signupResult
 
     private val loginService = ServicePool.loginService
 
@@ -51,18 +52,14 @@ class SignUpViewModel : ViewModel() {
                 response: Response<ResponseSignUpDto>,
             ) {
                 if (response.isSuccessful) {
-                    _errorMessage.value = ""
+                    _signupResult.value = UiState.Success
                 } else {
-                    if (response.code() in 400..499) {
-                        _errorMessage.value = "이미 가입된 아이디입니다"
-                    } else {
-                        _errorMessage.value = "서버에 문제가 발생했습니다"
-                    }
+                    _signupResult.value = UiState.Failure
                 }
             }
 
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
-                _errorMessage.value = "네트워크 연결에 문제가 있습니다"
+                _signupResult.value = UiState.Error
             }
 
         })

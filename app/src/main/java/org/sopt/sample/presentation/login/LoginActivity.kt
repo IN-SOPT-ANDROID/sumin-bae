@@ -7,18 +7,25 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.R
+import org.sopt.sample.data.service.UiState
 import org.sopt.sample.databinding.ActivityLoginBinding
 import org.sopt.sample.presentation.main.MainActivity
 import org.sopt.sample.presentation.signup.SignUpActivity
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel>()
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        addListeners()
+        addObservers()
+    }
+
+    private fun addListeners() {
         binding.btnLoginSubmit.setOnClickListener {
             val inputId = binding.etLoginId.text
             val inputPw = binding.etLoginPw.text
@@ -38,21 +45,26 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+    }
 
+    private fun addObservers() {
         viewModel.loginResult.observe(this) {
-            if (it.status in 200..299) {
-                Toast.makeText(this@LoginActivity,
-                    R.string.login_success,
-                    Toast.LENGTH_SHORT).show()
-
-                val intent = Intent(this, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
-                startActivity(intent)
+            when(it) {
+                UiState.Success -> intentToHome()
+                UiState.Failure -> Snackbar.make(binding.root, R.string.login_wrong_input, Snackbar.LENGTH_SHORT).show()
+                UiState.Error -> Snackbar.make(binding.root, R.string.login_request_fail, Snackbar.LENGTH_SHORT).show()
             }
         }
-        viewModel.errorMessage.observe(this) {
-            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun intentToHome() {
+        Toast.makeText(this@LoginActivity,
+            R.string.login_success,
+            Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
+        startActivity(intent)
     }
 }
