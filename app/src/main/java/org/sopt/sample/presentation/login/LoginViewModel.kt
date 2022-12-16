@@ -7,7 +7,7 @@ import org.sopt.sample.SeminarApp
 import org.sopt.sample.data.model.request.RequestLoginDto
 import org.sopt.sample.data.model.response.ResponseLoginDto
 import org.sopt.sample.data.service.ServicePool
-import org.sopt.sample.data.service.UiState
+import org.sopt.sample.util.UiState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

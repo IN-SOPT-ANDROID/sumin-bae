@@ -1,4 +1,4 @@
-package org.sopt.sample.data.service
+package org.sopt.sample.util
 
 sealed interface UiState {
     object Success: UiState

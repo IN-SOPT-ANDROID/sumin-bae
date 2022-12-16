@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import org.sopt.sample.data.model.request.RequestSignUpDto
 import org.sopt.sample.data.model.response.ResponseSignUpDto
 import org.sopt.sample.data.service.ServicePool
-import org.sopt.sample.data.service.UiState
+import org.sopt.sample.util.UiState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

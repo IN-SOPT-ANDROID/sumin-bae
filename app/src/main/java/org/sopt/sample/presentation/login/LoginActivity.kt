@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.R
-import org.sopt.sample.data.service.UiState
+import org.sopt.sample.util.UiState
 import org.sopt.sample.databinding.ActivityLoginBinding
 import org.sopt.sample.presentation.main.MainActivity
 import org.sopt.sample.presentation.signup.SignUpActivity
