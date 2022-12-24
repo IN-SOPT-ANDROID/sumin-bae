@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 import org.sopt.sample.R
 import org.sopt.sample.util.UiState
@@ -20,6 +21,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
 
         // 로그인한 상태이면 메인 페이지로 이동
         viewModel.autoLogin()
@@ -38,11 +43,6 @@ class LoginActivity : AppCompatActivity() {
                 Snackbar.make(binding.root, R.string.login_empty, Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            viewModel.login(
-                binding.etLoginId.text.toString(),
-                binding.etLoginPw.text.toString()
-            )
         }
         binding.btnToSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun showSuccessToast() {
+    private fun showSuccessToast() {
         Toast.makeText(this@LoginActivity,
             R.string.login_success,
             Toast.LENGTH_SHORT).show()

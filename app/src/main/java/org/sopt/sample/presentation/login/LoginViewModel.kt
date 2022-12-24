@@ -13,6 +13,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
+    val inputId = MutableLiveData("")
+    val inputPw = MutableLiveData("")
+
     // backing property
     private val _loginResult = MutableLiveData<UiState>()
     val loginResult: LiveData<UiState>

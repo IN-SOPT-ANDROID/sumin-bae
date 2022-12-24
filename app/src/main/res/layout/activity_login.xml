@@ -1,89 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.login.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_login_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/login_title"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="org.sopt.sample.presentation.login.LoginViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/tv_login_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/login_id"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_title" />
-
-    <EditText
-        android:id="@+id/et_login_id"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/login_id_hint"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_id" />
+        android:layout_height="match_parent"
+        tools:context=".presentation.login.LoginActivity">
 
-    <TextView
-        android:id="@+id/tv_login_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/login_pw"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/et_login_id"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_id" />
+        <TextView
+            android:id="@+id/tv_login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/login_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_login_pw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/login_pw_hint"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/tv_login_pw" />
+        <TextView
+            android:id="@+id/tv_login_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="60dp"
+            android:text="@string/login_id"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_title" />
 
-    <Button
-        android:id="@+id/btn_login_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_submit" />
+        <EditText
+            android:id="@+id/et_login_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/login_id_hint"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:text="@={vm.inputId}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_id" />
 
-    <Button
-        android:id="@+id/btn_to_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up_title" />
+        <TextView
+            android:id="@+id/tv_login_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/login_pw"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/et_login_id"
+            app:layout_constraintTop_toBottomOf="@+id/et_login_id" />
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        app:constraint_referenced_ids="btn_login_submit,btn_to_signup"
-        app:flow_wrapMode="chain"
-        app:flow_horizontalGap="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_pw" />
+        <EditText
+            android:id="@+id/et_login_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/login_pw_hint"
+            android:inputType="textPassword"
+            android:text="@={vm.inputPw}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_pw" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_login_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.login(vm.inputId, vm.inputPw)}"
+            android:text="@string/login_submit" />
+
+        <Button
+            android:id="@+id/btn_to_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_title" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flow_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            app:constraint_referenced_ids="btn_login_submit,btn_to_signup"
+            app:flow_wrapMode="chain"
+            app:flow_horizontalGap="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_login_pw" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

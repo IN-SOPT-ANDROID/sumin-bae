@@ -21,18 +21,10 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 잊지 않겠습니다....
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
-        binding.signup = viewModel
+        binding.vm = viewModel
         binding.lifecycleOwner = this
 
-        binding.btnSignupSubmit.setOnClickListener {
-            viewModel.signup(
-                binding.etSignupId.text.toString(),
-                binding.etSignupPw.text.toString(),
-                binding.etSignupName.text.toString()
-            )
-        }
         viewModel.signupResult.observe(this) {
             when (it) {
                 UiState.Success -> intentToLogin()

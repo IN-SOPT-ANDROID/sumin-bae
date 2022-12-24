@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="signup"
+            name="vm"
             type="org.sopt.sample.presentation.signup.SignUpViewModel" />
     </data>
 
@@ -47,11 +47,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@{(signup.isValidId || signup.inputId.isEmpty()) ? @color/black : @color/red_500}"
+            android:backgroundTint="@{(vm.isValidId || vm.inputId.isEmpty()) ? @color/black : @color/red_500}"
             android:hint="@string/login_id_hint"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:text="@={signup.inputId}"
+            android:text="@={vm.inputId}"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_id" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:text="@string/sign_up_error_id"
             android:textColor="@color/red_500"
             android:textSize="12sp"
-            android:visibility="@{(signup.isValidId || signup.inputId.isEmpty()) ? View.GONE : View.VISIBLE}"
+            android:visibility="@{(vm.isValidId || vm.inputId.isEmpty()) ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@+id/et_signup_id"
             app:layout_constraintStart_toStartOf="@+id/et_signup_id"
             app:layout_constraintTop_toBottomOf="@+id/et_signup_id" />
@@ -83,11 +83,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@{(signup.isValidPw || signup.inputPw.isEmpty()) ? @color/black : @color/red_500}"
+            android:backgroundTint="@{(vm.isValidPw || vm.inputPw.isEmpty()) ? @color/black : @color/red_500}"
             android:hint="@string/login_pw_hint"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:text="@={signup.inputPw}"
+            android:text="@={vm.inputPw}"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw" />
 
         <TextView
@@ -97,7 +97,7 @@
             android:text="@string/sign_up_error_pw"
             android:textColor="@color/red_500"
             android:textSize="12sp"
-            android:visibility="@{(signup.isValidPw || signup.inputPw.isEmpty()) ? View.GONE : View.VISIBLE}"
+            android:visibility="@{(vm.isValidPw || vm.inputPw.isEmpty()) ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@+id/et_signup_pw"
             app:layout_constraintStart_toStartOf="@+id/et_signup_pw"
             app:layout_constraintTop_toBottomOf="@+id/et_signup_pw" />
@@ -121,7 +121,7 @@
             android:layout_marginTop="10dp"
             android:hint="@string/sign_up_name_hint"
             android:inputType="text"
-            android:text="@={signup.inputName}"
+            android:text="@={vm.inputName}"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_name" />
 
         <Button
@@ -130,7 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="45dp"
-            android:enabled="@{!signup.inputId.isEmpty() &amp;&amp; !signup.inputPw.isEmpty() &amp;&amp; signup.isValidId &amp;&amp; signup.isValidPw &amp;&amp; signup.isValidName}"
+            android:enabled="@{vm.isValidId &amp;&amp; vm.isValidPw &amp;&amp; vm.isValidName}"
+            android:onClick="@{() -> vm.signup(vm.inputId, vm.inputPw, vm.inputName)}"
             android:text="@string/sign_up_submit"
             app:layout_constraintTop_toBottomOf="@+id/et_signup_name" />
 
