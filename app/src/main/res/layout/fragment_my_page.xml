@@ -24,11 +24,11 @@
         tools:text="@string/dummy_name" />
 
     <TextView
-        android:id="@+id/tv_mypage_email"
+        android:id="@+id/tv_mypage_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        tools:text="@string/dummy_email"
+        tools:text="@string/dummy_id"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:flow_verticalGap="2dp"
-        app:constraint_referenced_ids="iv_mypage,tv_mypage_name, tv_mypage_email, btn_mypage_logout"
+        app:constraint_referenced_ids="iv_mypage,tv_mypage_name, tv_mypage_id, btn_mypage_logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
